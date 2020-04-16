@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration = com.reserver.common.starter.data.jpa.basecrud.config.BaseCrudAutoConfiguration
