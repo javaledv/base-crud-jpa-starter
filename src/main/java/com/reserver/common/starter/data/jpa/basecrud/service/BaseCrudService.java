@@ -1,10 +1,10 @@
 package com.reserver.common.starter.data.jpa.basecrud.service;
 
 import com.reserver.common.starter.data.jpa.basecrud.entity.BaseEntity;
-import com.reserver.common.starter.data.jpa.basecrud.filter.BaseFilter;
-import org.springframework.data.domain.Example;
+import com.reserver.common.starter.data.jpa.basecrud.search.BaseSearchCriteria;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,9 +13,9 @@ import java.util.Optional;
  * The base CRUD service interface to extend.
  *
  * @param <E> - target entity type
- * @param <F> - target filter type
+ * @param <S> - target search criteria type
  */
-public interface BaseCrudService<E extends BaseEntity, F extends BaseFilter> {
+public interface BaseCrudService<E extends BaseEntity, S extends BaseSearchCriteria> {
 
     /**
      * Getting entity by specified id.
@@ -38,7 +38,7 @@ public interface BaseCrudService<E extends BaseEntity, F extends BaseFilter> {
      * @param filter the filter
      * @return the list of the entities
      */
-    List<E> getAll(F filter);
+    List<E> getAll(S filter);
 
     /**
      * Getting page of entities by specified pageable.
@@ -55,7 +55,7 @@ public interface BaseCrudService<E extends BaseEntity, F extends BaseFilter> {
      * @param pageable the pageable
      * @return the page of the entities
      */
-    Page<E> getPage(F filter, Pageable pageable);
+    Page<E> getPage(S filter, Pageable pageable);
 
     /**
      * Saving specified entity.
@@ -80,10 +80,10 @@ public interface BaseCrudService<E extends BaseEntity, F extends BaseFilter> {
     void deleteInBatch(List<E> entities);
 
     /**
-     * Creating the example by the specified filter.
+     * Creating the example by the specified searchCriteria.
      *
-     * @param filter the filter
+     * @param searchCriteria the searchCriteria
      * @return the example
      */
-    Example<E> createExample(BaseFilter filter);
+    Specification<E> createSpecification(S searchCriteria);
 }

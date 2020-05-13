@@ -2,7 +2,7 @@ package com.reserver.common.starter.data.jpa.basecrud.service.impl;
 
 import com.reserver.common.starter.data.jpa.basecrud.entity.BaseEntity;
 import com.reserver.common.starter.data.jpa.basecrud.repository.BaseCrudRepository;
-import com.reserver.common.starter.data.jpa.basecrud.filter.BaseFilter;
+import com.reserver.common.starter.data.jpa.basecrud.search.BaseSearchCriteria;
 import com.reserver.common.starter.data.jpa.basecrud.service.BaseCrudService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +16,7 @@ import java.util.Optional;
  * @param <E> the entity type
  * @param <F> the filter type
  */
-public abstract class AbstractBaseCrudService<E extends BaseEntity, F extends BaseFilter> implements BaseCrudService<E, F> {
+public abstract class AbstractBaseCrudService<E extends BaseEntity, F extends BaseSearchCriteria> implements BaseCrudService<E, F> {
 
     protected BaseCrudRepository<E> repository;
 
@@ -36,7 +36,7 @@ public abstract class AbstractBaseCrudService<E extends BaseEntity, F extends Ba
 
     @Override
     public List<E> getAll(F filter) {
-        return repository.findAll(createExample(filter));
+        return repository.findAll(createSpecification(filter));
     }
 
     @Override
@@ -46,7 +46,7 @@ public abstract class AbstractBaseCrudService<E extends BaseEntity, F extends Ba
 
     @Override
     public Page<E> getPage(F filter, Pageable pageable) {
-        return repository.findAll(createExample(filter), pageable);
+        return repository.findAll(createSpecification(filter), pageable);
     }
 
     @Override
