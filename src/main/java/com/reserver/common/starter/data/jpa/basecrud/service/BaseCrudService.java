@@ -66,6 +66,14 @@ public interface BaseCrudService<E extends BaseEntity, S extends BaseSearchCrite
     E save(E entity);
 
     /**
+     * Saving specified list of entities
+     *
+     * @param entities the entities
+     * @return the list of saved entities
+     */
+    List<E> saveAll(List<E> entities);
+
+    /**
      * Deleting the list of the entities.
      *
      * @param entities the list of the entities

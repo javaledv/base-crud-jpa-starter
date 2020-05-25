@@ -55,6 +55,11 @@ public abstract class AbstractBaseCrudService<E extends BaseEntity, F extends Ba
     }
 
     @Override
+    public List<E> saveAll(List<E> entities) {
+        return repository.saveAll(entities);
+    }
+
+    @Override
     public void delete(List<E> entities) {
         repository.deleteAll(entities);
     }
